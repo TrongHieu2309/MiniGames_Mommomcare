@@ -1,0 +1,12 @@
+using UnityEngine;
+
+public class DestroyZone : MonoBehaviour {
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Objects"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+}
