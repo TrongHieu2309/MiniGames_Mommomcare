@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Mini game 01
 public class Card : MonoBehaviour
 {
     public int id;
