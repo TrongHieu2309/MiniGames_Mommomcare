@@ -6,9 +6,21 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [Header("Mini Game 01")]
     [SerializeField] private GameObject prefabsCard;
     [SerializeField] private Transform gridParent;
     [SerializeField] private Sprite[] images;
+    [SerializeField] private Image productImage;
+    [SerializeField] private Animator productAnim;
+    [SerializeField] private Animator cardGridAnim;
+
+    [Header("Mini Game 02")]
+    [SerializeField] private Animator platformGame02Anim;
+    [SerializeField] private Animator bowTieAnim;
+    [SerializeField] private Animator ribbonAnim;
+    [SerializeField] private Animator ribbon01Anim;
+    [SerializeField] private GameObject spawnerPosition;
+
 
     private Card firstCard;
     private Card secondCard;
@@ -23,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SetupCards();
+        productImage.enabled = false;
     }
 
     private void SetupCards()
@@ -100,6 +113,10 @@ public class GameManager : MonoBehaviour
 
         if (firstCard.id == secondCard.id)
         {
+            productImage.enabled = true;
+            productImage.sprite = firstCard.frontImage.sprite;
+            productAnim.SetTrigger("showProduct");
+
             firstCard.DisableCard();
             secondCard.DisableCard();
         }
@@ -114,7 +131,14 @@ public class GameManager : MonoBehaviour
 
         if (AllCardMatched())
         {
-            Debug.Log("Winning!!!");
+            cardGridAnim.SetTrigger("winGame01");
+
+            // Mini game 02
+            platformGame02Anim.SetTrigger("start");
+            ribbonAnim.SetTrigger("ribbonStart");
+            ribbon01Anim.SetTrigger("ribbon01Start");
+            bowTieAnim.SetTrigger("bowTieStart");
+            spawnerPosition.SetActive(true);
         }
     }
 
